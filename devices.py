@@ -11,6 +11,8 @@ class Device:
         self.status = None
         self.actual_device = None
         self.value = None
+        self.floor = None
+        self.room = None
         self.update_device(actual_device)
 
     def update_device(self, device_info):
@@ -18,6 +20,8 @@ class Device:
         self.ref = device_info.get('ref')
         self.status = device_info.get('status')
         self.value = device_info.get('value')
+        self.floor = device_info.get('location2')
+        self.room = device_info.get('location')
         self.actual_device = device_info
 
     def change_value(self, new_value):
@@ -34,8 +38,8 @@ class Device:
         hs_communication.load_devices(self.ref)
 
     def __str__(self):
-        return 'Ref: {}, Name: {}, Status: {}, Current_Value: {}'.format(
-            self.ref, self.name, self.status, self.value
+        return 'Ref: {}, Name: {}, Status: {}, Current_Value: {}, Floor: {}, Room: {}'.format(
+            self.ref, self.name, self.status, self.value, self.floor, self.room
         )
 
 
@@ -52,13 +56,33 @@ def reload_device_by_ref(ref):
     hs_communication.load_devices(ref)
 
 
-def find_devices(name):
+def find_devices(name=None, room=None, floor=None):
     match_list = []
-    name = name.lower()
+
+    if name == '':
+        name = None
+
+    if room == '':
+        room = None
+
+    if floor == '':
+        floor = None
 
     for ref, device in device_list.items():
+        name_matches = False
+        room_matches = False
+        floor_matches = False
 
-        if name in device.name.lower():
+        if not name or name.lower() in device.name.lower():
+            name_matches = True
+
+        if not room or room.lower() in device.room.lower():
+            room_matches = True
+
+        if not floor or floor.lower() in device.floor.lower():
+            floor_matches = True
+
+        if floor_matches and room_matches and name_matches:
             match_list.append(device)
 
     return match_list

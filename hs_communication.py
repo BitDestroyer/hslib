@@ -3,6 +3,8 @@ import json
 import devices
 import hstoken
 
+# if you are not using a token file, then change the URL to be your local HomeSeer's IP address.
+# base_url = "http://my_local_ip_address/JSON?"
 base_url = "http://myhs.homeseer.com/JSON?token={}&".format(hstoken.secret)
 
 def do_communication(http_request, data=None):

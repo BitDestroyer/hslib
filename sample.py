@@ -22,9 +22,11 @@ How to find an exact device
 How to find an all devices matching a portion of the device name
 """
 # name = input("Enter a Device name: ")
+# floor = input("Enter a Device floor: ")
+# room = input("Enter a Device room: ")
 #
-#
-# result = devices.find_devices(name)
+# print("searching for name: ", name + " and room: ", room + " and floor: ", floor)
+# result = devices.find_devices(name=name, floor=floor, room=room)
 #
 # for match in result:
 #     print(match)
@@ -53,10 +55,4 @@ turn off a device
 """
 Update all devices whose status have changed since last update
 """
-name = input("Enter a Device name: ")
-devices.update_all_devices()
-device = devices.find_exact_device(name)
-print(device)
-time.sleep(4)
-devices.update_all_devices()
-print(device)
+# devices.update_all_devices()

@@ -1,0 +1,10 @@
+# This is a template for the token file.  A token is a client access token you get from HomeSeer to give
+# remote access to your system. The actual token should NOT be put into github as it will give the world
+# access to your system.
+#
+# Instructions:
+#     Get the token
+#     Copy or rename this file to "hstoken.py"
+#     Fill in the token below with the real token IN THE HSTOKEN.PY file, not the template.
+
+secret = "my_token_goes_here"
