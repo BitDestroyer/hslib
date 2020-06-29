@@ -6,6 +6,7 @@ device_list = {}
 
 class Device:
     def __init__(self, actual_device):
+        self.callback = None
         self.name = None
         self.ref = None
         self.status = None
@@ -16,6 +17,7 @@ class Device:
         self.update_device(actual_device)
 
     def update_device(self, device_info):
+        old_value = self.value
         self.name = device_info.get('name')
         self.ref = device_info.get('ref')
         self.status = device_info.get('status')
@@ -23,6 +25,10 @@ class Device:
         self.floor = device_info.get('location2')
         self.room = device_info.get('location')
         self.actual_device = device_info
+
+        if self.value != old_value:
+            if self.callback:
+                self.callback(self)
 
     def change_value(self, new_value):
         new_value = float(new_value)
@@ -44,12 +50,15 @@ class Device:
 
 
 def add_device(dev):
-    if dev.get('relationship') in [0, 2]:
-        ref = dev.get('ref')
-        if device_list.get(ref):
-            device_list[ref].update_device(dev)
-        else:
-            device_list[ref] = Device(dev)
+
+    # if dev.get('relationship') in [0, 2]:
+    ref = dev.get('ref')
+
+    if device_list.get(ref):
+        device_list[ref].update_device(dev)
+
+    else:
+        device_list[ref] = Device(dev)
 
 
 def reload_device_by_ref(ref):

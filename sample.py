@@ -56,3 +56,22 @@ turn off a device
 Update all devices whose status have changed since last update
 """
 # devices.update_all_devices()
+
+"""
+this is a sample of automating through usage of the libraries functions
+"""
+# def motion_has_changed(device):
+#     temperature = devices.find_devices(name='Ambient Temperature', room="apartment")[0]
+#     light = devices.find_exact_device("apt1")
+#     print("motion has changed, it is now: {} it is about {} degrees in the apartment".format(device.status, temperature.value))
+#     if device.status == "Motion":
+#         devices.turn_on(light.name)
+#     else:
+#         devices.turn_off(light.name)
+#
+#
+# motion = devices.find_devices(name="Home Security", room="Apartment")[0]
+# motion.callback = motion_has_changed
+# while True:
+#     time.sleep(1)
+#     devices.update_all_devices()
