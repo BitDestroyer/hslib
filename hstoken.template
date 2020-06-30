@@ -7,4 +7,10 @@
 #     Copy or rename this file to "hstoken.py"
 #     Fill in the token below with the real token IN THE HSTOKEN.PY file, not the template.
 
-secret = "my_token_goes_here"
+secret = None
+
+# If you are not using a token/secret, enter the username and password for your system, as well as the IP
+# address
+username = "username_goes_here"
+password = "password goes here"
+ip_address = "ip.goes.right.here"

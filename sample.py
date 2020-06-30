@@ -19,7 +19,7 @@ How to find an exact device
 
 
 """
-How to find an all devices matching a portion of the device name
+How to find an all devices matching a portion of the device name, room, or by floor
 """
 # name = input("Enter a Device name: ")
 # floor = input("Enter a Device floor: ")
@@ -45,12 +45,12 @@ turn on a device
 """
 turn off a device
 """
-# name = input("Enter a Device name: ")
-# device = devices.find_exact_device(name)
-# print(device)
-#
-# devices.turn_off(name)
-# print(device)
+name = input("Enter a Device name: ")
+device = devices.find_exact_device(name)
+print(device)
+
+devices.turn_off(name)
+print(device)
 
 """
 Update all devices whose status have changed since last update

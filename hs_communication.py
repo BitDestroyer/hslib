@@ -1,16 +1,34 @@
 import urllib.request
+import urllib.parse
 import json
 import devices
 import hstoken
 
 # if you are not using a token file, then change the URL to be your local HomeSeer's IP address.
 # base_url = "http://my_local_ip_address/JSON?"
-base_url = "http://myhs.homeseer.com/JSON?token={}&".format(hstoken.secret)
+if hstoken.secret:
+    base_url = "http://myhs.homeseer.com/JSON?token={}&".format(hstoken.secret)
+else:
+    base_url = "http://{}/JSON?".format(hstoken.ip_address)
+
+if hstoken.username is not None:
+    # install an authentication opener for URLs
+    password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+    password_mgr.add_password(None,
+                              base_url,
+                              hstoken.username,
+                              hstoken.password)
+
+    handler = urllib.request.HTTPBasicAuthHandler(password_mgr)
+
+    urllib.request.install_opener(urllib.request.build_opener(handler))
+
 
 def do_communication(http_request, data=None):
     """
     Make a request to HomeSeer and get the answer in JSON
     """
+    print("Accessing: ", http_request)
     with urllib.request.urlopen(http_request, data=data) as data_stream:
         raw_data = data_stream.read()
 
