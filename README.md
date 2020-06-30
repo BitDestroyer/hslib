@@ -17,6 +17,7 @@ This is a python library designed to control and update devices allowing for cus
  Import devices
  
  lights = device.find_device(ApartmentLights)
+ 
  if motion.status == "ON"
     device.turn_on(lights)
 
